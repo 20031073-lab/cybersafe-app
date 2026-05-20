@@ -28,6 +28,10 @@ class CyberSafeApp extends StatelessWidget {
   }
 }
 
+////////////////////////////////////////////////////////
+/// LOGIN SCREEN
+////////////////////////////////////////////////////////
+
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
@@ -50,11 +54,11 @@ class LoginScreen extends StatelessWidget {
             padding: const EdgeInsets.all(24),
 
             child: Card(
+              elevation: 12,
+
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(24),
               ),
-
-              elevation: 10,
 
               child: Padding(
                 padding: const EdgeInsets.all(24),
@@ -65,7 +69,7 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     const Icon(Icons.security, size: 90, color: Colors.blue),
 
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 20),
 
                     const Text(
                       "CyberSafe",
@@ -79,7 +83,7 @@ class LoginScreen extends StatelessWidget {
 
                     const Text(
                       "Protect Your Digital Life",
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
 
                     const SizedBox(height: 30),
@@ -88,11 +92,11 @@ class LoginScreen extends StatelessWidget {
                       decoration: InputDecoration(
                         labelText: "Email",
 
+                        prefixIcon: const Icon(Icons.email),
+
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(14),
                         ),
-
-                        prefixIcon: const Icon(Icons.email),
                       ),
                     ),
 
@@ -104,11 +108,11 @@ class LoginScreen extends StatelessWidget {
                       decoration: InputDecoration(
                         labelText: "Password",
 
+                        prefixIcon: const Icon(Icons.lock),
+
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(14),
                         ),
-
-                        prefixIcon: const Icon(Icons.lock),
                       ),
                     ),
 
@@ -157,6 +161,10 @@ class LoginScreen extends StatelessWidget {
   }
 }
 
+////////////////////////////////////////////////////////
+/// HOME SCREEN WITH BOTTOM NAVIGATION
+////////////////////////////////////////////////////////
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -181,6 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
 
         onTap: (index) {
           setState(() {
@@ -191,7 +200,10 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
 
-          BottomNavigationBarItem(icon: Icon(Icons.security), label: "Tips"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.security),
+            label: "Security",
+          ),
 
           BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
         ],
@@ -199,6 +211,10 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+////////////////////////////////////////////////////////
+/// DASHBOARD SCREEN
+////////////////////////////////////////////////////////
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -211,9 +227,9 @@ class DashboardPage extends StatelessWidget {
     Widget page,
   ) {
     return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      elevation: 8,
 
-      elevation: 10,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
 
       child: ListTile(
         leading: Icon(icon, size: 40, color: Colors.blue),
@@ -248,10 +264,10 @@ class DashboardPage extends StatelessWidget {
               style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
 
-            const SizedBox(height: 20),
+            const SizedBox(height: 18),
 
             const Text(
-              "Stay protected against cyber threats and improve your digital security awareness using CyberSafe.",
+              "Stay protected against cyber threats and improve your digital security awareness.",
               style: TextStyle(fontSize: 16, color: Colors.black54),
             ),
 
@@ -279,6 +295,10 @@ class DashboardPage extends StatelessWidget {
   }
 }
 
+////////////////////////////////////////////////////////
+/// PASSWORD CHECKER SCREEN
+////////////////////////////////////////////////////////
+
 class PasswordCheckerScreen extends StatefulWidget {
   const PasswordCheckerScreen({super.key});
 
@@ -288,6 +308,7 @@ class PasswordCheckerScreen extends StatefulWidget {
 
 class _PasswordCheckerScreenState extends State<PasswordCheckerScreen> {
   String result = "Enter Password";
+
   double strength = 0;
 
   void checkPassword(String value) {
@@ -350,6 +371,23 @@ class _PasswordCheckerScreenState extends State<PasswordCheckerScreen> {
 
               style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
             ),
+
+            const SizedBox(height: 20),
+
+            const Align(
+              alignment: Alignment.centerLeft,
+
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+
+                children: [
+                  Text("• Use 8+ characters"),
+                  Text("• Add symbols"),
+                  Text("• Use uppercase letters"),
+                  Text("• Avoid common passwords"),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -357,12 +395,16 @@ class _PasswordCheckerScreenState extends State<PasswordCheckerScreen> {
   }
 }
 
+////////////////////////////////////////////////////////
+/// SECURITY TIPS SCREEN
+////////////////////////////////////////////////////////
+
 class TipsScreen extends StatelessWidget {
   const TipsScreen({super.key});
 
   Widget tipCard(IconData icon, String title, String text) {
     return Card(
-      elevation: 4,
+      elevation: 5,
 
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
 
@@ -387,7 +429,7 @@ class TipsScreen extends StatelessWidget {
         child: Column(
           children: [
             tipCard(
-              Icons.link_off,
+              Icons.warning,
               "Avoid Suspicious Links",
               "Never click unknown email links.",
             ),
@@ -410,8 +452,29 @@ class TipsScreen extends StatelessWidget {
   }
 }
 
+////////////////////////////////////////////////////////
+/// PROFILE SCREEN
+////////////////////////////////////////////////////////
+
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
+
+  Widget profileCard(IconData icon, String title) {
+    return Card(
+      elevation: 4,
+
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+
+      child: ListTile(
+        leading: Icon(icon, color: Colors.blue, size: 36),
+
+        title: Text(
+          title,
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -423,44 +486,38 @@ class ProfileScreen extends StatelessWidget {
 
         child: Column(
           children: [
+            const SizedBox(height: 20),
+
             const CircleAvatar(
               radius: 50,
               backgroundColor: Colors.blue,
 
-              child: Icon(Icons.person, color: Colors.white, size: 60),
+              child: Icon(Icons.person, size: 60, color: Colors.white),
             ),
 
             const SizedBox(height: 20),
 
             const Text(
-              "Shahedur Rahman",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+              "Shahedur Rahman Nayem",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 8),
 
             const Text(
               "Cyber Security Student",
-              style: TextStyle(fontSize: 18, color: Colors.black54),
+              style: TextStyle(fontSize: 18, color: Colors.grey),
             ),
+
+            const SizedBox(height: 8),
+
+            const Text("CyberSafe v1.0", style: TextStyle(fontSize: 16)),
 
             const SizedBox(height: 30),
 
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.settings),
-                title: const Text("Settings"),
-                trailing: const Icon(Icons.arrow_forward_ios),
-              ),
-            ),
+            profileCard(Icons.settings, "Settings"),
 
-            Card(
-              child: ListTile(
-                leading: const Icon(Icons.info),
-                title: const Text("About App"),
-                trailing: const Icon(Icons.arrow_forward_ios),
-              ),
-            ),
+            profileCard(Icons.info, "App Info"),
           ],
         ),
       ),
